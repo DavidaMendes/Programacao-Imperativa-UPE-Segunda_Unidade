@@ -176,3 +176,53 @@ void remover_usuario() {
     }
     pausar();
 }
+
+int fazer_login_backend(const char* usuario, const char* senha) {
+    for (int i = 0; i < total_usuarios; i++) {
+        if (strcmp(usuarios[i].usuario, usuario) == 0 &&
+            strcmp(usuarios[i].senha, senha) == 0 &&
+            usuarios[i].ativo == 1) {
+            return 1;
+        }
+    }
+    return 0; 
+}
+int cadastrar_usuario_backend(const char *novoUsuario, const char *novaSenha) {
+    if (total_usuarios >= MAX_USUARIOS) {
+        return 2; 
+    }
+
+    for (int i = 0; i < total_usuarios; i++) {
+        if (strcmp(usuarios[i].usuario, novoUsuario) == 0) {
+            return 1; 
+        }
+    }
+
+    strcpy(usuarios[total_usuarios].usuario, novoUsuario);
+    strcpy(usuarios[total_usuarios].senha, novaSenha);
+    usuarios[total_usuarios].ativo = 1;
+    total_usuarios++;
+
+    return 0; 
+}
+int alterar_usuario_backend(const char *nomeUsuario, const char *novaSenha) {
+    for (int i = 0; i < total_usuarios; i++) {
+        if (strcmp(usuarios[i].usuario, nomeUsuario) == 0) {
+            strcpy(usuarios[i].senha, novaSenha);
+            return 0; 
+        }
+    }
+    return 1; 
+}
+int remover_usuario_backend(const char *nomeUsuario) {
+    if (strcmp(nomeUsuario, "luciana") == 0) {
+        return 2; 
+    }
+
+    for (int i = 0; i < total_usuarios; i++) {
+        if (strcmp(usuarios[i].usuario, nomeUsuario) == 0) {
+            usuarios[i].ativo = 0; 
+            return 0; 
+        }
+    }
+    return 1;

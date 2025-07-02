@@ -28,6 +28,7 @@ typedef struct {
     float valor_total;
     int embarque_confirmado; 
     int seguro_ativo; 
+    int ativo; 
 } Aluno;
 
 extern Usuario usuarios[MAX_USUARIOS];
@@ -40,5 +41,6 @@ void inicializar_sistema();
 void carregar_dados();
 void salvar_dados();
 void menu_principal();
+void debug_log_usuarios();
 
 #endif
